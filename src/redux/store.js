@@ -13,7 +13,6 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 
 import phonebookReducer from './phonebook/phonebook-reducer';
 import { authReducer } from './auth';
-// import persistStore from 'redux-persist/es/persistStore';
 
 const middleware = [
   ...getDefaultMiddleware({

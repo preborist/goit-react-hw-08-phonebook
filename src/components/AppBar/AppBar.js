@@ -4,13 +4,20 @@ import Navigation from '../Navigation';
 import UserMenu from '../UserMenu';
 import AuthNav from '../AuthNav';
 import { authSelectors } from '../../redux/auth';
+import AppBar from '@material-ui/core/AppBar';
+import Container from '@material-ui/core/Container';
+import './AppBar.scss';
 
-const AppBar = ({ isAuthentificated }) => {
+const MyAppBar = ({ isAuthentificated }) => {
   return (
-    <header className="AppBar">
-      <Navigation />
-      {isAuthentificated ? <UserMenu /> : <AuthNav />}
-    </header>
+    <AppBar position="static">
+      <Container>
+        <header className="header__container">
+          <Navigation />
+          {isAuthentificated ? <UserMenu /> : <AuthNav />}
+        </header>
+      </Container>
+    </AppBar>
   );
 };
 
@@ -18,4 +25,4 @@ const mapStateToProps = state => ({
   isAuthentificated: authSelectors.getIsAuthenticated(state),
 });
 
-export default connect(mapStateToProps)(AppBar);
+export default connect(mapStateToProps)(MyAppBar);

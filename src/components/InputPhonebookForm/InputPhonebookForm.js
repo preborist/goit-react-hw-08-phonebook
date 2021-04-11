@@ -4,7 +4,9 @@ import * as phonebookOperations from '../../redux/phonebook/phonebook-operations
 import './InputPhonebookForm.scss';
 // import ContactsList from '../ContactsList';
 import * as phonebookSelectors from '../../redux/phonebook/contacts-selectors';
-
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
 class InputPhonebookForm extends Component {
   state = {
     name: '',
@@ -40,29 +42,42 @@ class InputPhonebookForm extends Component {
 
     return (
       <>
-        <h1>Phonebook</h1>
-        <form className="InputPhonebookForm" onSubmit={this.handleSubmit}>
-          <label>
-            <span className="label">Name</span>
-            <input
+        <Card className="InputPhonebookForm__container">
+          <form
+            className="InputPhonebookForm"
+            onSubmit={this.handleSubmit}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="name"
+              label="Name"
               onChange={this.handleInputChange}
               name="name"
               type="text"
               value={name}
+              className="InputPhonebookForm__item"
             />
-          </label>
-          <label>
-            <span className="label">Number</span>
-            <input
+            <TextField
+              id="number"
+              label="Phone Number"
               onChange={this.handleInputChange}
               name="number"
               type="number"
               value={number}
+              className="InputPhonebookForm__item"
             />
-          </label>
 
-          <button type="submit">Add contact</button>
-        </form>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="InputPhonebookForm__item"
+            >
+              Add contact
+            </Button>
+          </form>
+        </Card>
       </>
     );
   }

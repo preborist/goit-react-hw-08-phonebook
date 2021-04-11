@@ -1,7 +1,9 @@
-.ContactList {
-  margin-left: 30px;
-  max-width: 300px;
+.ContactsList__title {
+  margin-top: 10px;
+  text-align: center;
 }
-.ContactList__item:not(:last-child) {
-  margin-bottom: 10px;
+
+.ContactsList_alert {
+  display: flex;
+  justify-content: center;
 }

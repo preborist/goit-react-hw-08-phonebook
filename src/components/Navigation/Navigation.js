@@ -2,10 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authSelectors } from '../../redux/auth';
+import './Navigation.scss';
 
 const Navigation = ({ isAuthentificated }) => {
   return (
-    <nav>
+    <nav className="Navigation">
       <NavLink
         exact
         to="/"

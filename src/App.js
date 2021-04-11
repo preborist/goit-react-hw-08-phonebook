@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { fetchContacts } from './redux/phonebook/phonebook-operations';
-
-// import InputPhonebookForm from './components/InputPhonebookForm';
-// import ContactsList from './components/ContactsList';
-
-import { Switch, Route } from 'react-router-dom';
+import React, { Component, Suspense, lazy } from 'react';
+import { Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Container from './components/Container';
-import AppBar from './components/AppBar';
-import HomeView from './views/HomeView';
-import RegisterView from './views/RegisterView';
-import LoginView from './views/LoginView';
-import PhonebookView from './views/PhonebookView';
+import MyAppBar from './components/AppBar';
 import { authOperations } from './redux/auth';
 import PrivatRoute from './components/PrivatRoute';
 import PublicRoute from './components/PublicRoute';
-// import * as phonebookSelectors from './redux/phonebook/contacts-selectors';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+
+const HomeView = lazy(
+  () => import('./views/HomeView') /* webpackChunkName: "HomeView" */,
+);
+const RegisterView = lazy(
+  () => import('./views/RegisterView') /* webpackChunkName: "RegisterView" */,
+);
+const LoginView = lazy(
+  () => import('./views/LoginView') /* webpackChunkName: "LoginView" */,
+);
+const PhonebookView = lazy(
+  () => import('./views/PhonebookView') /* webpackChunkName: "PhonebookView" */,
+);
 class App extends Component {
   componentDidMount() {
     this.props.onGetCurrentUser();
@@ -25,30 +28,35 @@ class App extends Component {
 
   render() {
     return (
-      <Container>
-        <AppBar />
+      <>
+        <CssBaseline />
 
-        <Switch>
-          <PublicRoute exact path="/" component={HomeView} />
-          <PublicRoute
-            path="/register"
-            restricted
-            redirectTo="/contacts"
-            component={RegisterView}
-          />
-          <PublicRoute
-            path="/login"
-            restricted
-            component={LoginView}
-            redirectTo="/contacts"
-          />
-          <PrivatRoute
-            path="/contacts"
-            component={PhonebookView}
-            redirectTo="/login"
-          />
-        </Switch>
-      </Container>
+        <MyAppBar />
+        <Container>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Switch>
+              <PublicRoute exact path="/" component={HomeView} />
+              <PublicRoute
+                path="/register"
+                restricted
+                redirectTo="/contacts"
+                component={RegisterView}
+              />
+              <PublicRoute
+                path="/login"
+                restricted
+                component={LoginView}
+                redirectTo="/contacts"
+              />
+              <PrivatRoute
+                path="/contacts"
+                component={PhonebookView}
+                redirectTo="/login"
+              />
+            </Switch>
+          </Suspense>
+        </Container>
+      </>
     );
   }
 }

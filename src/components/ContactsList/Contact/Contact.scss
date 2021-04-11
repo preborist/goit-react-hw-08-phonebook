@@ -1,10 +1,13 @@
 .Contact {
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
   justify-content: space-between;
-  max-width: 290px;
+  background-color: #fff;
 }
 
 .name,
 .number {
+  display: inline-flex;
   margin-right: 10px;
 }
